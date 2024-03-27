@@ -59,7 +59,7 @@ def get_teams():
 
 
 @app.get("/teams/{id}")
-def get_team(id):
+def get_team(id: int):
     return {"team": id}
 
 
@@ -79,8 +79,8 @@ def get_comments():
 
 
 @app.get("/comments/{id}")
-def get_comment(id):
-    comment = find_comment(int(id))
+def get_comment(id: int):
+    comment = find_comment(id)
     return {"data": comment}
 
 
