@@ -1,7 +1,7 @@
-from fastapi import FastAPI, Response, status, HTTPException
+from fastapi import FastAPI, Response, status, HTTPException, Query
 from fastapi.params import Body
 from pydantic import BaseModel
-from typing import Optional
+from typing import Optional, Annotated
 from datetime import date
 from random import randrange
 
@@ -12,21 +12,21 @@ app = FastAPI()
 
 class Comment(BaseModel):
     content: str
-    date_mod: Optional[date] = date.today()  # remove.
-    user_id: int
 
-# class Pal(BaseModel):
+
+class Pal(BaseModel):
+    name: str
+    skills: list[str] | None = None
+    type: list[str] | None = None
+    # soul allocation
 
 
 class Team(BaseModel):
     title: str
     tags: list[str]
     published: bool = False
-    date_mod: date
-    likes: Optional[int] = None
-    user_id: int
-    comments: Optional[list[Comment]] = None
-    # pals: list[Pal]
+    pals: list[Pal]
+    notes: str | None = None
 
 
 # Testing Data
