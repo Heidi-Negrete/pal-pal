@@ -10,7 +10,8 @@ services:
       - ENVIRONMENT=${ENVIRONMENT}
       - POSTGRES_SERVER=${POSTGRES_SERVER}
       - POSTGRES_PORT=${POSTGRES_PORT}
-      - POSTGRES_USER=postgres
+      - POSTGRES_USER=paluser
+      - POSTGRES_DB=pal-db
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     ports:
       - 8000:8000

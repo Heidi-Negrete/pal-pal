@@ -4,8 +4,17 @@ from pydantic import BaseModel
 from typing import Optional, Annotated
 from datetime import date
 from random import randrange
+from sqlmodel import Session
+from .database import create_db_and_tables, engine
+from .models import Team as TDB  # temporary alias to resolve namespace conflict
+
 
 app = FastAPI()
+
+
+@app.on_event("startup")
+def on_startup():
+    create_db_and_tables()
 
 # Schemas
 
