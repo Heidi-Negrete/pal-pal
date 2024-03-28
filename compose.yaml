@@ -1,0 +1,32 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    depends_on:
+      - db
+    env_file:
+      - .env
+    environment:
+      - ENVIRONMENT=${ENVIRONMENT}
+      - POSTGRES_SERVER=${POSTGRES_SERVER}
+      - POSTGRES_PORT=${POSTGRES_PORT}
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    ports:
+      - 8000:8000
+  
+  db:
+    image: postgres:15
+    restart: always
+    shm_size: 128mb
+    volumes:
+      - pal-db-data:/var/lib/postgresql/data/pgdata
+    ports:
+      - 5432:5432
+    env_file:
+      - .env
+    environment:
+      - PGDATA=/var/lib/postgresql/data/pgdata
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+volumes: 
+  pal-db-data:
